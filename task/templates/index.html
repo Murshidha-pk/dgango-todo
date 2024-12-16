@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    
+        <h1 class="mx-4 mt-2">Welcome User {{request.user}}</h1>
+    <div class="container">
+       
+        <div class="w-75 border rounded border-3 shadow mx-auto mt-5 p-4">
+
+            <div class="creat-box">
+                <form action="" method="post">
+                    {%csrf_token%}
+        
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Enter todo title" aria-label="Recipient's username" aria-describedby="button-addon2" name="title">
+                        <button class="btn btn-outline-success" type="submit" id="button-addon2">ADD</button>
+                      </div>
+                      
+        
+                </form>
+                <div>
+                    {%for t in data%}
+
+                    <div class="w-100 border  rounded bg-body-tertiary mb-2 p-2">
+
+                        {% if t.status %} 
+                        <!-- status==True -->
+
+                        <div class="text-decoration-line-through">
+                            {{t.title}}
+                        </div>
+                        {%else%}
+                        <div >
+                            {{t.title}}
+
+                        </div>
+                        {%endif%}
+                        <div>
+                            <a href="{% url 'todo-remove' t.id %}">Remove</a>
+
+                            {%if t.status == False %}
+                            <a href="{% url 'todo-change' t.id %}">Mark as done</a>
+
+                            {%endif%}
+
+                        </div>
+
+                    </div>
+
+                    {%endfor%}
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+</html>
