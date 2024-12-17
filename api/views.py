@@ -35,7 +35,9 @@ class UserCreationView(APIView):
 
 class TodoListCreateView(APIView):
 
-    authentication_classes=[authentication.BasicAuthentication]
+    # authentication_classes=[authentication.BasicAuthentication]
+
+    authentication_classes=[authentication.TokenAuthentication]
 
     permission_classes=[permissions.IsAuthenticated]
 
@@ -81,7 +83,9 @@ class TodoRetrieveUpdateDestroyView(APIView):
 
     serializer_class=TodoSerializer
 
-    authentication_classes=[authentication.BasicAuthentication]
+    # authentication_classes=[authentication.BasicAuthentication]
+
+    authentication_classes=[authentication.TokenAuthentication]
 
     permission_classes=[permissions.IsAuthenticated]
 
